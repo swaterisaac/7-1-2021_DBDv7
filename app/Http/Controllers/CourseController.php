@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Models\Course;
+
 
 class CourseController extends Controller
 {
@@ -16,10 +16,15 @@ class CourseController extends Controller
     public function index()
     {
         $course = Course::all();
-        if ($course != NULL) {
-            return response()->json($course);
+        
+        if (!empty($course)) {
+            return view('home', [
+                "course" => $course,
+            ]); //Esto se puede hacer con compact
         }
-        return "No existen cursos.";
+        return response()->json([
+            "msg"=> "No existen cursos."
+        ]);
     }
 
     /**
@@ -48,10 +53,7 @@ class CourseController extends Controller
         $course->name = $request->name;
         $course->id_subject = $request->id_subject;
         $course->save();
-        return response()->json([
-            "message" => "Se ha creado un nuevo curso.",
-            "id" => $course->id
-        ], 202);
+        return redirect('/');
     }
 
     /**

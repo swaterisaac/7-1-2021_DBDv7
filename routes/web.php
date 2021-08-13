@@ -12,14 +12,15 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+/*
 Route::get('/', function () {
     return view('welcome');
 });
+*/
 
-Route::get('/courses', 'CourseController@index');
+Route::get('/', 'CourseController@index');
 Route::get('/courses/{id}','CourseController@show');
-Route::post('/courses/create','CourseController@store');
+Route::post('/courses/create','CourseController@store')->name('course');
 Route::put('/courses/update/{id}','CourseController@update');
 Route::delete('/courses/delete/{id}','CourseController@destroy');
 
@@ -47,7 +48,7 @@ Route::post('/student/create','StudentController@store');
 Route::put('/student/update/{id}','StudentController@update');
 Route::delete('/student/delete/{id}','StudentController@destroy');
 
-Route::get('/subjects', 'SubjectController@index');
+Route::get('/form', 'SubjectController@index');
 Route::get('/subject/{id}','SubjectController@show');
 Route::post('/subject/create','SubjectController@store');
 Route::put('/subject/update/{id}','SubjectController@update');

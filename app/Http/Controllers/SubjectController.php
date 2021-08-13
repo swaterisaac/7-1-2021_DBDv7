@@ -16,8 +16,10 @@ class SubjectController extends Controller
     public function index()
     {
         $subject = Subject::all();
-        if ($subject != NULL) {
-            return response()->json($subject);
+        if (!empty($subject)) {
+            return view('form',[
+                "subject" => $subject,
+            ]);
         }
         return "No existe asignaturas.";
     }
